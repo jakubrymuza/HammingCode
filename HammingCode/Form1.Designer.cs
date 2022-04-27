@@ -193,7 +193,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(132, 20);
             this.label11.TabIndex = 6;
-            this.label11.Text = "Mateusz Szymczak";
+            this.label11.Text = "Karol Nowiński";
             // 
             // label12
             // 
@@ -211,7 +211,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(108, 20);
             this.label13.TabIndex = 8;
-            this.label13.Text = "Karol Nowiński";
+            this.label13.Text = "Mateusz Szymczak";
             // 
             // Form1
             // 
