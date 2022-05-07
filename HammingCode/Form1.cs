@@ -13,5 +13,15 @@ namespace HammingCode
             label8.Visible = true;
             label9.Visible = true;
         }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
