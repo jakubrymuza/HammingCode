@@ -35,9 +35,15 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -48,16 +54,16 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -127,6 +133,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label20);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.button1);
@@ -140,6 +147,14 @@
             this.tabPage1.Text = "Kodowanie";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(371, 349);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(0, 20);
+            this.label20.TabIndex = 10;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -152,7 +167,12 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.label26);
+            this.groupBox1.Controls.Add(this.label25);
+            this.groupBox1.Controls.Add(this.label24);
+            this.groupBox1.Controls.Add(this.label23);
+            this.groupBox1.Controls.Add(this.label22);
+            this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
@@ -167,14 +187,59 @@
             this.groupBox1.Text = "Bity kontrolne";
             this.groupBox1.Visible = false;
             // 
-            // label10
+            // label26
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 143);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(48, 20);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "C64 =";
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(64, 123);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(58, 20);
+            this.label26.TabIndex = 12;
+            this.label26.Text = "label26";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(64, 103);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(58, 20);
+            this.label25.TabIndex = 11;
+            this.label25.Text = "label25";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(64, 83);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(58, 20);
+            this.label24.TabIndex = 10;
+            this.label24.Text = "label24";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(64, 62);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(58, 20);
+            this.label23.TabIndex = 9;
+            this.label23.Text = "label23";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(64, 45);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(58, 20);
+            this.label22.TabIndex = 8;
+            this.label22.Text = "label22";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(64, 25);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(58, 20);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "label21";
             // 
             // label7
             // 
@@ -274,46 +339,14 @@
             this.tabPage2.Text = "Dekodowanie";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label14
+            // label19
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(272, 32);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(124, 20);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "Słowo poprawne:";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(414, 29);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(125, 27);
-            this.textBox2.TabIndex = 1;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(272, 80);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(121, 20);
-            this.label15.TabIndex = 2;
-            this.label15.Text = "Słowo odebrane:";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(414, 77);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(125, 27);
-            this.textBox3.TabIndex = 3;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(348, 125);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(94, 29);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Sprawdź";
-            this.button2.UseVisualStyleBackColor = true;
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(272, 353);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(238, 20);
+            this.label19.TabIndex = 6;
+            this.label19.Text = "Poprawione i zdekodowane słowo:";
             // 
             // groupBox3
             // 
@@ -327,14 +360,14 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Wynik";
             // 
-            // label16
+            // label18
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(4, 46);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(174, 20);
-            this.label16.TabIndex = 4;
-            this.label16.Text = "Pierwotne bity kontrolne:";
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(4, 86);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(71, 20);
+            this.label18.TabIndex = 6;
+            this.label18.Text = "Syndrom:";
             // 
             // label17
             // 
@@ -345,23 +378,55 @@
             this.label17.TabIndex = 5;
             this.label17.Text = "Nowe bity kontrolne:";
             // 
-            // label18
+            // label16
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(4, 86);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(71, 20);
-            this.label18.TabIndex = 6;
-            this.label18.Text = "Syndrom:";
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(4, 46);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(174, 20);
+            this.label16.TabIndex = 4;
+            this.label16.Text = "Pierwotne bity kontrolne:";
             // 
-            // label19
+            // button2
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(272, 353);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(238, 20);
-            this.label19.TabIndex = 6;
-            this.label19.Text = "Poprawione i zdekodowane słowo:";
+            this.button2.Location = new System.Drawing.Point(348, 125);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(94, 29);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Sprawdź";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(414, 77);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(125, 27);
+            this.textBox3.TabIndex = 3;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(272, 80);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(121, 20);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "Słowo odebrane:";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(414, 29);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(125, 27);
+            this.textBox2.TabIndex = 1;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(272, 32);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(124, 20);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Słowo poprawne:";
             // 
             // Form1
             // 
@@ -399,7 +464,6 @@
         private TabPage tabPage1;
         private Label label8;
         private GroupBox groupBox1;
-        private Label label10;
         private Label label7;
         private Label label6;
         private Label label5;
@@ -420,5 +484,12 @@
         private Label label18;
         private Label label17;
         private Label label16;
+        private Label label20;
+        private Label label26;
+        private Label label25;
+        private Label label24;
+        private Label label23;
+        private Label label22;
+        private Label label21;
     }
 }
