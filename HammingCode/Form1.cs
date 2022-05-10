@@ -24,7 +24,7 @@ namespace HammingCode
             string c2Text = $"{input[7]} xor {input[5]} xor {input[4]} xor {input[2]} xor {input[1]} = {hammingCode[10]}";
             string c4Text = $"{input[6]} xor {input[5]} xor {input[4]} xor {input[0]} = {hammingCode[8]}";
             string c8Text = $"{input[3]} xor {input[2]} xor {input[1]} xor {input[0]} = {hammingCode[4]}";
-            string output = new (hammingCode.Select(x => x == true ? '1' : '0').ToArray());
+            string output = new(hammingCode.Select(x => x == true ? '1' : '0').ToArray());
             label20.Text = output;
             label21.Text = c1Text;
             label22.Text = c2Text;
@@ -32,16 +32,6 @@ namespace HammingCode
             label24.Text = c8Text;
             groupBox1.Visible = true;
             label8.Visible = true;
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         bool[] CalculateControlBits(bool[] word)
@@ -64,32 +54,6 @@ namespace HammingCode
             return position - 4;
         }
 
-        // funkcja szuka bitu na kt�rym wyst�puje b��d w s�owie
-        int FindErrorPosition(bool[] correctWord, bool[] incorrectWord)
-        {
-            // kody korekcyjne odpowiednio dla poprawnego i nieporawnego s�owa
-            bool[] controlCorrect = CalculateControlBits(correctWord);
-            bool[] controlIncorrect = CalculateControlBits(incorrectWord);
-
-            int syndrome = 0;
-
-            // liczenie syndromu - XOR po wszystkich bitach obu kod�w korekcyjnych
-            for (int i = 0, p = 1; i < 4; i++, p <<= 1)
-                syndrome += Convert.ToInt32(controlCorrect[i] ^ controlIncorrect[i]) * p;
-
-            return PositionWithShift(syndrome);
-        }
-
-        // t�umaczy pozycje bit�w danych ze s�owa pierwotnego na pozycje w kodzie hamminga
-        int translatePosition(int position)
-        {
-            int offset = 0;
-            if (position == 0) offset = 2;
-            else if (position < 4) offset = 3;
-            else offset = 4;
-
-            return offset + position;
-        }
 
         // funkcja koduje s�owo za pomoc� kodu hamminga
         bool[] ConvertToHamming(bool[] word)
@@ -122,9 +86,9 @@ namespace HammingCode
                 MessageBox.Show("Podaj 8-bitową liczbę binarną");
                 return;
             }
-            if(diff != 1)
+            if (diff != 1)
             {
-                MessageBox.Show("Podane ciagi nie różnią się jednym bitem. Wyliczony syndrom nie pozwoli na korekcję błędów.", "Uwaga", 
+                MessageBox.Show("Podane ciagi nie różnią się jednym bitem. Wyliczony syndrom nie pozwoli na korekcję błędów.", "Uwaga",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             bool[] correctWord = input1.AsEnumerable().Select(x => x == '1').ToArray();
@@ -144,166 +108,6 @@ namespace HammingCode
             label4.Text = newControlBits;
             label10.Text = PositionWithShift(syndrome).ToString();
             groupBox3.Visible = true;
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label19_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label20_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label25_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label24_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label23_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label22_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label21_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label18_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label17_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

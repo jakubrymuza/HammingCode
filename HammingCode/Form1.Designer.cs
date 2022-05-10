@@ -127,7 +127,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(876, 462);
             this.tabControl1.TabIndex = 9;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -278,7 +277,6 @@
             this.label1.Size = new System.Drawing.Size(175, 20);
             this.label1.TabIndex = 5;
             this.label1.Text = "Wprowadź dane binarne:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tabPage2
             // 
