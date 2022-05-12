@@ -9,75 +9,25 @@ namespace HammingCode
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void EncodeButtonClick(object sender, EventArgs e)
         {
-            string input = textBox1.Text;
+            string input = txtEncode.Text;
             Regex regex = new("[^01]");
             if (input.Length != 8 || regex.IsMatch(input))
             {
                 MessageBox.Show("Podaj 8-bitową liczbę binarną");
                 return;
             }
-            bool[] bits = textBox1.Text.AsEnumerable().Select(x => x == '1').ToArray();
-            bool[] hammingCode = ConvertToHamming(bits);
-            string c1Text = $"{input[7]} xor {input[6]} xor {input[4]} xor {input[3]} xor {input[1]} = {hammingCode[11]}";
-            string c2Text = $"{input[7]} xor {input[5]} xor {input[4]} xor {input[2]} xor {input[1]} = {hammingCode[10]}";
-            string c4Text = $"{input[6]} xor {input[5]} xor {input[4]} xor {input[0]} = {hammingCode[8]}";
-            string c8Text = $"{input[3]} xor {input[2]} xor {input[1]} xor {input[0]} = {hammingCode[4]}";
-            string output = new(hammingCode.Select(x => x == true ? '1' : '0').ToArray());
-            label20.Text = output;
-            label21.Text = c1Text;
-            label22.Text = c2Text;
-            label23.Text = c4Text;
-            label24.Text = c8Text;
-            groupBox1.Visible = true;
-            label8.Visible = true;
-        }
-
-        bool[] CalculateControlBits(bool[] word)
-        {
-            bool[] control = new bool[4]; // bity kontrolne C1 C2 C4 C8
-
-            control[0] = word[0] ^ word[1] ^ word[3] ^ word[4] ^ word[6];
-            control[1] = word[0] ^ word[2] ^ word[3] ^ word[5] ^ word[6];
-            control[2] = word[1] ^ word[2] ^ word[3] ^ word[7];
-            control[3] = word[4] ^ word[5] ^ word[6] ^ word[7];
-
-            return control;
-        }
-
-        // funkcja oblicza pozycj� po przesuni�ciu ze wzgl�du na dodanie kod�w korekcyjnych
-        int PositionWithShift(int position)
-        {
-            if (position < 4) return position - 2;
-            if (position < 8) return position - 3;
-            return position - 4;
-        }
-
-
-        // funkcja koduje s�owo za pomoc� kodu hamminga
-        bool[] ConvertToHamming(bool[] word)
-        {
-            bool[] hammingCode = new bool[12];
-            bool[] controlBits = CalculateControlBits(word.Reverse().ToArray());
-            hammingCode[11] = controlBits[0];
-            hammingCode[10] = controlBits[1];
-            hammingCode[8] = controlBits[2];
-            hammingCode[4] = controlBits[3];
-            hammingCode[0] = word[0];
-            hammingCode[1] = word[1];
-            hammingCode[2] = word[2];
-            hammingCode[3] = word[3];
-            hammingCode[5] = word[4];
-            hammingCode[6] = word[5];
-            hammingCode[7] = word[6];
-            hammingCode[9] = word[7];
-            return hammingCode;
+            bool[] bits = txtEncode.Text.AsEnumerable().Select(x => x == '1').ToArray();
+            bool[] hammingCode = HammingCoder.ConvertToHamming(bits);
+            SetUITexts(input, hammingCode);
+            groupControlBits.Visible = true;
+            lblEncodedWordText.Visible = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string input1 = textBox2.Text;
+            /*string input1 = textBox2.Text;
             string input2 = textBox3.Text;
             int diff = input1.Zip(input2, (x, y) => x == y).Count(z => !z); // liczba różniących się bitów w słowach wejściowych
             Regex regex = new("[^01]");
@@ -107,7 +57,23 @@ namespace HammingCode
             label3.Text = oldControlBits;
             label4.Text = newControlBits;
             label10.Text = PositionWithShift(syndrome).ToString();
-            groupBox3.Visible = true;
+            groupBox3.Visible = true;*/
+        }
+
+        void SetUITexts(string input, bool[] hammingCode)
+        {
+            string c1Text = $"{input[7]} xor {input[6]} xor {input[4]} xor {input[3]} xor {input[1]} = {hammingCode[11]}";
+            string c2Text = $"{input[7]} xor {input[5]} xor {input[4]} xor {input[2]} xor {input[1]} = {hammingCode[10]}";
+            string c4Text = $"{input[6]} xor {input[5]} xor {input[4]} xor {input[0]} = {hammingCode[8]}";
+            string c8Text = $"{input[3]} xor {input[2]} xor {input[1]} xor {input[0]} = {hammingCode[4]}";
+            string output = new(hammingCode.Select(x => x == true ? '1' : '0').ToArray());
+            lblEncodedWord.Text = output;
+            lblC1.Text = c1Text;
+            lblC2.Text = c2Text;
+            lblC4.Text = c4Text;
+            lblC8.Text = c8Text;
+            lblCorrectWord.Text = output;
+            btnDecode.Enabled = true;
         }
     }
 }
