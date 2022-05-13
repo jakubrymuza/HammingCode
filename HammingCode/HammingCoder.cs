@@ -8,7 +8,7 @@ namespace HammingCode
 {
     internal static class HammingCoder
     {
-        static bool[] CalculateControlBits(bool[] word)
+        public static bool[] CalculateControlBits(bool[] word)
         {
             bool[] control = new bool[4]; // bity kontrolne C1 C2 C4 C8
 
@@ -21,7 +21,7 @@ namespace HammingCode
         }
 
         // funkcja oblicza pozycj� po przesuni�ciu ze wzgl�du na dodanie kod�w korekcyjnych
-        static int PositionWithShift(int position)
+        public static int PositionWithShift(int position)
         {
             if (position < 4) return position - 2;
             if (position < 8) return position - 3;

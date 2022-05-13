@@ -50,8 +50,9 @@
             this.txtEncode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.lblCorrectWord = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupResult = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,14 +62,13 @@
             this.btnDecode = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupControlBits.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.groupResult.SuspendLayout();
             this.SuspendLayout();
             // 
             // label9
@@ -283,7 +283,7 @@
             // 
             this.tabPage2.Controls.Add(this.numericUpDown1);
             this.tabPage2.Controls.Add(this.lblCorrectWord);
-            this.tabPage2.Controls.Add(this.groupBox3);
+            this.tabPage2.Controls.Add(this.groupResult);
             this.tabPage2.Controls.Add(this.btnDecode);
             this.tabPage2.Controls.Add(this.label15);
             this.tabPage2.Controls.Add(this.label14);
@@ -295,6 +295,28 @@
             this.tabPage2.Text = "Dekodowanie";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(426, 78);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(63, 27);
+            this.numericUpDown1.TabIndex = 7;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // lblCorrectWord
             // 
             this.lblCorrectWord.AutoSize = true;
@@ -304,21 +326,21 @@
             this.lblCorrectWord.TabIndex = 6;
             this.lblCorrectWord.Text = "Zakoduj słowo, używając modułu kodowania...";
             // 
-            // groupBox3
+            // groupResult
             // 
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.label18);
-            this.groupBox3.Controls.Add(this.label17);
-            this.groupBox3.Controls.Add(this.label16);
-            this.groupBox3.Location = new System.Drawing.Point(206, 185);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(369, 147);
-            this.groupBox3.TabIndex = 5;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Wynik";
-            this.groupBox3.Visible = false;
+            this.groupResult.Controls.Add(this.label10);
+            this.groupResult.Controls.Add(this.label4);
+            this.groupResult.Controls.Add(this.label3);
+            this.groupResult.Controls.Add(this.label18);
+            this.groupResult.Controls.Add(this.label17);
+            this.groupResult.Controls.Add(this.label16);
+            this.groupResult.Location = new System.Drawing.Point(206, 185);
+            this.groupResult.Name = "groupResult";
+            this.groupResult.Size = new System.Drawing.Size(369, 147);
+            this.groupResult.TabIndex = 5;
+            this.groupResult.TabStop = false;
+            this.groupResult.Text = "Wynik";
+            this.groupResult.Visible = false;
             // 
             // label10
             // 
@@ -403,28 +425,6 @@
             this.label14.TabIndex = 0;
             this.label14.Text = "Słowo poprawne:";
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(426, 78);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            12,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(63, 27);
-            this.numericUpDown1.TabIndex = 7;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -444,9 +444,9 @@
             this.groupControlBits.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.groupResult.ResumeLayout(false);
+            this.groupResult.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -463,7 +463,7 @@
         private Button btnDecode;
         private Label label15;
         private Label label14;
-        private GroupBox groupBox3;
+        private GroupBox groupResult;
         private Label label18;
         private Label label17;
         private Label label16;

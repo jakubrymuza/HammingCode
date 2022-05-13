@@ -27,37 +27,36 @@ namespace HammingCode
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*string input1 = textBox2.Text;
-            string input2 = textBox3.Text;
-            int diff = input1.Zip(input2, (x, y) => x == y).Count(z => !z); // liczba różniących się bitów w słowach wejściowych
-            Regex regex = new("[^01]");
-            if (input1.Length != 8 || regex.IsMatch(input1) || input2.Length != 8 || regex.IsMatch(input2))
-            {
-                MessageBox.Show("Podaj 8-bitową liczbę binarną");
-                return;
-            }
-            if (diff != 1)
-            {
-                MessageBox.Show("Podane ciagi nie różnią się jednym bitem. Wyliczony syndrom nie pozwoli na korekcję błędów.", "Uwaga",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            bool[] correctWord = input1.AsEnumerable().Select(x => x == '1').ToArray();
-            bool[] incorrectWord = input2.AsEnumerable().Select(x => x == '1').ToArray();
-            bool[] controlCorrect = CalculateControlBits(correctWord);
-            bool[] controlIncorrect = CalculateControlBits(incorrectWord);
+            string correctWord = lblCorrectWord.Text;
+            int wrongBit = (int)numericUpDown1.Value;
+            char wrongChar = correctWord[wrongBit - 1];
+            string wrongWord = correctWord.Remove(wrongBit - 1, 1).Insert(wrongBit - 1, wrongChar == '1' ? "0" : "1");
+            string controlBits = correctWord[4].ToString() + correctWord[8] + correctWord[10] + correctWord[11];
+            
+            string actualWord = correctWord.Substring(0, 4) + correctWord.Substring(5, 3) + correctWord[9];
+            string actualWrongWord = wrongWord.Substring(0, 4) + wrongWord.Substring(5, 3) + wrongWord[9];
+            bool[] wrongWordHammingCode = HammingCoder.ConvertToHamming(actualWrongWord.AsEnumerable().Select(x => x == '1').ToArray());
+            string wrongWordHammingCodeText = new(wrongWordHammingCode.Select(x => x == true ? '1' : '0').ToArray());
+            string wrongWordControlBits = wrongWordHammingCodeText[4].ToString() + wrongWordHammingCodeText[8] + wrongWordHammingCodeText[10] + wrongWordHammingCodeText[11];
+
+            bool[] controlCorrect = controlBits.AsEnumerable().Select(x => x == '1').ToArray();
+            bool[] controlIncorrect = wrongWordControlBits.AsEnumerable().Select(x => x == '1').ToArray();
 
             int syndrome = 0;
 
             // liczenie syndromu - XOR po wszystkich bitach obu kod�w korekcyjnych
-            for (int i = 0, p = 1; i < 4; i++, p <<= 1)
+            for (int i = 0, p = 8; i < 4; i++, p >>= 1)
                 syndrome += Convert.ToInt32(controlCorrect[i] ^ controlIncorrect[i]) * p;
 
-            string oldControlBits = new(controlCorrect.AsEnumerable().Select(x => x == true ? '1' : '0').ToArray());
-            string newControlBits = new(controlIncorrect.AsEnumerable().Select(x => x == true ? '1' : '0').ToArray());
-            label3.Text = oldControlBits;
-            label4.Text = newControlBits;
-            label10.Text = PositionWithShift(syndrome).ToString();
-            groupBox3.Visible = true;*/
+            //syndrome = HammingCoder.PositionWithShift(syndrome);
+
+            //xorResult = HammingCoder.PositionWithShift(xorResult);
+
+            label10.Text = syndrome.ToString();
+            label3.Text = controlBits;
+            label4.Text = wrongWordControlBits;
+            groupResult.Visible = true;
+
         }
 
         void SetUITexts(string input, bool[] hammingCode)
