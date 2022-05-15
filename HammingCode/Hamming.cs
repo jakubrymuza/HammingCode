@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HammingCode
+﻿namespace HammingCode
 {
-    internal static class Hamming
+    public static class Hamming
     {
         public static bool[] CalculateControlBits(bool[] word)
         {

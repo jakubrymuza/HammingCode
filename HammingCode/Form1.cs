@@ -12,18 +12,14 @@ namespace HammingCode
         private void CodeButton_Click(object sender, EventArgs e)
         {
             string input = ToCodeTextBox.Text;
-            Regex regex = new("[^01]");
 
-            if (input.Length != 8 || regex.IsMatch(input))
-            {
-                MessageBox.Show("Podaj 8-bitową liczbę binarną");
+            if (!Validate(input))
                 return;
-            }
 
-            bool[] bits = ToCodeTextBox.Text.AsEnumerable().Select(x => x == '1').ToArray();
+            bool[] bits = BinaryConverter.StringToBin(input);
             bool[] hammingCode = Hamming.ConvertToHamming(bits);
 
-            ShowControlBits(bits, input);
+            ShowControlBits(input);
 
             string output = new(hammingCode.Select(x => x == true ? '1' : '0').ToArray());
 
@@ -31,8 +27,22 @@ namespace HammingCode
             CodedWordDescLabel.Visible = true;
         }
 
-        private void ShowControlBits(bool[] bits, string input)
+        private bool Validate(string input)
         {
+            Regex regex = new("[^01]");
+
+            if (input.Length != 8 || regex.IsMatch(input))
+            {
+                MessageBox.Show("Podaj 8-bitową liczbę binarną");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ShowControlBits(string input)
+        {
+            bool[] bits = BinaryConverter.StringToBin(input);
             bool[] controlDigits = Hamming.CalculateControlBits(bits);
 
             string c1Text = $"{input[7]} xor {input[6]} xor {input[4]} xor {input[3]} xor {input[1]} = {controlDigits[0]}";
