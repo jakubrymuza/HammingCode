@@ -9,7 +9,7 @@ namespace HammingCode
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CodeButton_Click(object sender, EventArgs e)
         {
             string input = textBox1.Text;
             Regex regex = new("[^01]");
@@ -19,11 +19,12 @@ namespace HammingCode
                 return;
             }
             bool[] bits = textBox1.Text.AsEnumerable().Select(x => x == '1').ToArray();
-            bool[] hammingCode = ConvertToHamming(bits);
-            string c1Text = $"{input[7]} xor {input[6]} xor {input[4]} xor {input[3]} xor {input[1]} = {hammingCode[11]}";
-            string c2Text = $"{input[7]} xor {input[5]} xor {input[4]} xor {input[2]} xor {input[1]} = {hammingCode[10]}";
-            string c4Text = $"{input[6]} xor {input[5]} xor {input[4]} xor {input[0]} = {hammingCode[8]}";
-            string c8Text = $"{input[3]} xor {input[2]} xor {input[1]} xor {input[0]} = {hammingCode[4]}";
+            bool[] hammingCode = Hamming.ConvertToHamming(bits);
+            bool[] controlDigits = Hamming.GetControlDigits(hammingCode);
+            string c1Text = $"{input[7]} xor {input[6]} xor {input[4]} xor {input[3]} xor {input[1]} = {controlDigits[0]}";
+            string c2Text = $"{input[7]} xor {input[5]} xor {input[4]} xor {input[2]} xor {input[1]} = {controlDigits[1]}";
+            string c4Text = $"{input[6]} xor {input[5]} xor {input[4]} xor {input[0]} = {controlDigits[2]}";
+            string c8Text = $"{input[3]} xor {input[2]} xor {input[1]} xor {input[0]} = {controlDigits[3]}";
             string output = new(hammingCode.Select(x => x == true ? '1' : '0').ToArray());
             label20.Text = output;
             label21.Text = c1Text;
@@ -34,48 +35,9 @@ namespace HammingCode
             label8.Visible = true;
         }
 
-        bool[] CalculateControlBits(bool[] word)
-        {
-            bool[] control = new bool[4]; // bity kontrolne C1 C2 C4 C8
-
-            control[0] = word[0] ^ word[1] ^ word[3] ^ word[4] ^ word[6];
-            control[1] = word[0] ^ word[2] ^ word[3] ^ word[5] ^ word[6];
-            control[2] = word[1] ^ word[2] ^ word[3] ^ word[7];
-            control[3] = word[4] ^ word[5] ^ word[6] ^ word[7];
-
-            return control;
-        }
-
-        // funkcja oblicza pozycj� po przesuni�ciu ze wzgl�du na dodanie kod�w korekcyjnych
-        int PositionWithShift(int position)
-        {
-            if (position < 4) return position - 2;
-            if (position < 8) return position - 3;
-            return position - 4;
-        }
 
 
-        // funkcja koduje s�owo za pomoc� kodu hamminga
-        bool[] ConvertToHamming(bool[] word)
-        {
-            bool[] hammingCode = new bool[12];
-            bool[] controlBits = CalculateControlBits(word.Reverse().ToArray());
-            hammingCode[11] = controlBits[0];
-            hammingCode[10] = controlBits[1];
-            hammingCode[8] = controlBits[2];
-            hammingCode[4] = controlBits[3];
-            hammingCode[0] = word[0];
-            hammingCode[1] = word[1];
-            hammingCode[2] = word[2];
-            hammingCode[3] = word[3];
-            hammingCode[5] = word[4];
-            hammingCode[6] = word[5];
-            hammingCode[7] = word[6];
-            hammingCode[9] = word[7];
-            return hammingCode;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void DecodeButton_Click(object sender, EventArgs e)
         {
             string input1 = textBox2.Text;
             string input2 = textBox3.Text;
@@ -93,8 +55,8 @@ namespace HammingCode
             }
             bool[] correctWord = input1.AsEnumerable().Select(x => x == '1').ToArray();
             bool[] incorrectWord = input2.AsEnumerable().Select(x => x == '1').ToArray();
-            bool[] controlCorrect = CalculateControlBits(correctWord);
-            bool[] controlIncorrect = CalculateControlBits(incorrectWord);
+            bool[] controlCorrect = Hamming.CalculateControlBits(correctWord);
+            bool[] controlIncorrect = Hamming.CalculateControlBits(incorrectWord);
 
             int syndrome = 0;
 
@@ -106,7 +68,7 @@ namespace HammingCode
             string newControlBits = new(controlIncorrect.AsEnumerable().Select(x => x == true ? '1' : '0').ToArray());
             label3.Text = oldControlBits;
             label4.Text = newControlBits;
-            label10.Text = PositionWithShift(syndrome).ToString();
+            label10.Text = Hamming.PositionWithShift(syndrome).ToString();
             groupBox3.Visible = true;
         }
     }
