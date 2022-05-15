@@ -14,7 +14,7 @@
             return control;
         }
 
-        // funkcja obliczająca pozycje po przesunieciu ze wzgledu na dodanie kodów korekcyjnych
+        // funkcja obliczająca pozycje po przesunieciu ze względu na dodanie kodów korekcyjnych
         public static int PositionWithShift(int position)
         {
             if (position < 4) return position - 2;
