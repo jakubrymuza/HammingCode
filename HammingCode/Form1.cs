@@ -24,6 +24,7 @@ namespace HammingCode
             string output = new(hammingCode.Select(x => x == true ? '1' : '0').ToArray());
 
             CodedWordLabel.Text = output;
+            CorrectWordLabel.Text = output;
             CodedWordDescLabel.Visible = true;
         }
 
@@ -59,14 +60,28 @@ namespace HammingCode
 
         private void DecodeButton_Click(object sender, EventArgs e)
         {
-            string input = CorrectWordLabel.Text;
-            if (!Validate(input)) return;
-            int indexToChange = (int)CorruptedBitNumber.Value - 1;
-            char valueToChange = input[indexToChange];
+            string word = CorrectWordLabel.Text;
+            int indexToChange = 12 - (int)CorruptedBitNumber.Value;
+            char valueToChange = word[indexToChange];
             char replacemnetValue = valueToChange == '1' ? '0' : '1';
-            string corruptedWord = input.Remove(indexToChange, 1).Insert(indexToChange, replacemnetValue.ToString());
+            string input = word.Substring(0, 4) + word.Substring(5, 3) + word[9];
+            string corruptedWord = word.Remove(indexToChange, 1).Insert(indexToChange, replacemnetValue.ToString());
+            string corruptedInput = corruptedWord.Substring(0, 4) + corruptedWord.Substring(5, 3) + corruptedWord[9];
             bool[] bits = BinaryConverter.StringToBin(input);
-            bool[] hammingCode = Hamming.ConvertToHamming(bits);
+            bool[] corruptedBits = BinaryConverter.StringToBin(corruptedInput);
+            bool[] correctHammingCode = Hamming.ConvertToHamming(bits);
+            bool[] corruptedHammingCode = Hamming.ConvertToHamming(corruptedBits);
+            int syndrome = 0;
+            syndrome += Convert.ToInt32(correctHammingCode[4] ^ corruptedHammingCode[4]) * 8;
+            syndrome += Convert.ToInt32(correctHammingCode[8] ^ corruptedHammingCode[8]) * 4;
+            syndrome += Convert.ToInt32(correctHammingCode[10] ^ corruptedHammingCode[10]) * 2;
+            syndrome += Convert.ToInt32(correctHammingCode[11] ^ corruptedHammingCode[11]) * 1;
+            char[] correctControlBits = correctHammingCode.Select(e => e == true ? '1' : '0').ToArray();
+            char[] corruptedControlBits = corruptedHammingCode.Select(e => e == true ? '1' : '0').ToArray();
+            label3.Text = correctControlBits[4].ToString() + correctControlBits[8] + correctControlBits[10] + correctControlBits[11];
+            label4.Text = corruptedControlBits[4].ToString() + corruptedControlBits[8] + corruptedControlBits[10] + corruptedControlBits[11];
+            label10.Text = syndrome.ToString();
+            groupBox3.Visible = true;
         }
     }
 }

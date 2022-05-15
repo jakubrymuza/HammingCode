@@ -50,6 +50,9 @@
             this.ToCodeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.CorruptedBitNumber = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.CorrectWordLabel = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -59,16 +62,13 @@
             this.label16 = new System.Windows.Forms.Label();
             this.decodeButton = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.CorrectWordLabel = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.CorruptedBitNumber = new System.Windows.Forms.NumericUpDown();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.ControlBitsGroupBox.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CorruptedBitNumber)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label9
@@ -139,7 +139,7 @@
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(867, 428);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Kodowanie";
@@ -289,11 +289,50 @@
             this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(867, 428);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Dekodowanie";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // CorruptedBitNumber
+            // 
+            this.CorruptedBitNumber.Location = new System.Drawing.Point(494, 78);
+            this.CorruptedBitNumber.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.CorruptedBitNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.CorruptedBitNumber.Name = "CorruptedBitNumber";
+            this.CorruptedBitNumber.Size = new System.Drawing.Size(57, 27);
+            this.CorruptedBitNumber.TabIndex = 8;
+            this.CorruptedBitNumber.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(273, 80);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(215, 20);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Przekłamany bit: (nr od prawej)";
+            // 
+            // CorrectWordLabel
+            // 
+            this.CorrectWordLabel.AutoSize = true;
+            this.CorrectWordLabel.Location = new System.Drawing.Point(414, 32);
+            this.CorrectWordLabel.Name = "CorrectWordLabel";
+            this.CorrectWordLabel.Size = new System.Drawing.Size(0, 20);
+            this.CorrectWordLabel.TabIndex = 6;
             // 
             // groupBox3
             // 
@@ -384,45 +423,6 @@
             this.label14.TabIndex = 0;
             this.label14.Text = "Słowo poprawne:";
             // 
-            // CorrectWordLabel
-            // 
-            this.CorrectWordLabel.AutoSize = true;
-            this.CorrectWordLabel.Location = new System.Drawing.Point(414, 32);
-            this.CorrectWordLabel.Name = "CorrectWordLabel";
-            this.CorrectWordLabel.Size = new System.Drawing.Size(0, 20);
-            this.CorrectWordLabel.TabIndex = 6;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(273, 80);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(205, 20);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Przekłamany bit: (nr od lewej)";
-            // 
-            // CorruptedBitNumber
-            // 
-            this.CorruptedBitNumber.Location = new System.Drawing.Point(484, 78);
-            this.CorruptedBitNumber.Maximum = new decimal(new int[] {
-            12,
-            0,
-            0,
-            0});
-            this.CorruptedBitNumber.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.CorruptedBitNumber.Name = "CorruptedBitNumber";
-            this.CorruptedBitNumber.Size = new System.Drawing.Size(57, 27);
-            this.CorruptedBitNumber.TabIndex = 8;
-            this.CorruptedBitNumber.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -442,9 +442,9 @@
             this.ControlBitsGroupBox.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CorruptedBitNumber)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CorruptedBitNumber)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
