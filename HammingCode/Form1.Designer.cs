@@ -35,19 +35,19 @@
             this.label11 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
+            this.CodedWordLabel = new System.Windows.Forms.Label();
+            this.CodedWordDescLabel = new System.Windows.Forms.Label();
+            this.ControlBitsGroupBox = new System.Windows.Forms.GroupBox();
+            this.C8Label = new System.Windows.Forms.Label();
+            this.C4Label = new System.Windows.Forms.Label();
+            this.C2Label = new System.Windows.Forms.Label();
+            this.C1Label = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.codeButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ToCodeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -65,7 +65,7 @@
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.ControlBitsGroupBox.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -133,11 +133,11 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.label20);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.CodedWordLabel);
+            this.tabPage1.Controls.Add(this.CodedWordDescLabel);
+            this.tabPage1.Controls.Add(this.ControlBitsGroupBox);
             this.tabPage1.Controls.Add(this.codeButton);
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.ToCodeTextBox);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -150,77 +150,77 @@
             // 
             // label20
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(325, 262);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(0, 15);
-            this.label20.TabIndex = 10;
+            this.CodedWordLabel.AutoSize = true;
+            this.CodedWordLabel.Location = new System.Drawing.Point(325, 262);
+            this.CodedWordLabel.Name = "label20";
+            this.CodedWordLabel.Size = new System.Drawing.Size(0, 15);
+            this.CodedWordLabel.TabIndex = 10;
             // 
-            // label8
+            // codedWordDescLabel
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(196, 262);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(112, 15);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "Zakodowane słowo:";
-            this.label8.Visible = false;
+            this.CodedWordDescLabel.AutoSize = true;
+            this.CodedWordDescLabel.Location = new System.Drawing.Point(196, 262);
+            this.CodedWordDescLabel.Name = "codedWordDescLabel";
+            this.CodedWordDescLabel.Size = new System.Drawing.Size(112, 15);
+            this.CodedWordDescLabel.TabIndex = 9;
+            this.CodedWordDescLabel.Text = "Zakodowane słowo:";
+            this.CodedWordDescLabel.Visible = false;
             // 
-            // groupBox1
+            // controlBitsGroupBox
             // 
-            this.groupBox1.Controls.Add(this.label24);
-            this.groupBox1.Controls.Add(this.label23);
-            this.groupBox1.Controls.Add(this.label22);
-            this.groupBox1.Controls.Add(this.label21);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(191, 96);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(381, 127);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Bity kontrolne";
-            this.groupBox1.Visible = false;
+            this.ControlBitsGroupBox.Controls.Add(this.C8Label);
+            this.ControlBitsGroupBox.Controls.Add(this.C4Label);
+            this.ControlBitsGroupBox.Controls.Add(this.C2Label);
+            this.ControlBitsGroupBox.Controls.Add(this.C1Label);
+            this.ControlBitsGroupBox.Controls.Add(this.label7);
+            this.ControlBitsGroupBox.Controls.Add(this.label6);
+            this.ControlBitsGroupBox.Controls.Add(this.label5);
+            this.ControlBitsGroupBox.Controls.Add(this.label2);
+            this.ControlBitsGroupBox.Location = new System.Drawing.Point(191, 96);
+            this.ControlBitsGroupBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ControlBitsGroupBox.Name = "controlBitsGroupBox";
+            this.ControlBitsGroupBox.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ControlBitsGroupBox.Size = new System.Drawing.Size(381, 127);
+            this.ControlBitsGroupBox.TabIndex = 8;
+            this.ControlBitsGroupBox.TabStop = false;
+            this.ControlBitsGroupBox.Text = "Bity kontrolne";
+            this.ControlBitsGroupBox.Visible = false;
             // 
             // label24
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(56, 62);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(44, 15);
-            this.label24.TabIndex = 10;
-            this.label24.Text = "label24";
+            this.C8Label.AutoSize = true;
+            this.C8Label.Location = new System.Drawing.Point(56, 62);
+            this.C8Label.Name = "label24";
+            this.C8Label.Size = new System.Drawing.Size(44, 15);
+            this.C8Label.TabIndex = 10;
+            this.C8Label.Text = "label24";
             // 
             // label23
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(56, 46);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(44, 15);
-            this.label23.TabIndex = 9;
-            this.label23.Text = "label23";
+            this.C4Label.AutoSize = true;
+            this.C4Label.Location = new System.Drawing.Point(56, 46);
+            this.C4Label.Name = "label23";
+            this.C4Label.Size = new System.Drawing.Size(44, 15);
+            this.C4Label.TabIndex = 9;
+            this.C4Label.Text = "label23";
             // 
             // label22
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(56, 34);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(44, 15);
-            this.label22.TabIndex = 8;
-            this.label22.Text = "label22";
+            this.C2Label.AutoSize = true;
+            this.C2Label.Location = new System.Drawing.Point(56, 34);
+            this.C2Label.Name = "label22";
+            this.C2Label.Size = new System.Drawing.Size(44, 15);
+            this.C2Label.TabIndex = 8;
+            this.C2Label.Text = "label22";
             // 
             // label21
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(56, 19);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(44, 15);
-            this.label21.TabIndex = 7;
-            this.label21.Text = "label21";
+            this.C1Label.AutoSize = true;
+            this.C1Label.Location = new System.Drawing.Point(56, 19);
+            this.C1Label.Name = "label21";
+            this.C1Label.Size = new System.Drawing.Size(44, 15);
+            this.C1Label.TabIndex = 7;
+            this.C1Label.Text = "label21";
             // 
             // label7
             // 
@@ -271,11 +271,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(366, 10);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(206, 23);
-            this.textBox1.TabIndex = 6;
+            this.ToCodeTextBox.Location = new System.Drawing.Point(366, 10);
+            this.ToCodeTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ToCodeTextBox.Name = "textBox1";
+            this.ToCodeTextBox.Size = new System.Drawing.Size(206, 23);
+            this.ToCodeTextBox.TabIndex = 6;
             // 
             // label1
             // 
@@ -436,8 +436,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.ControlBitsGroupBox.ResumeLayout(false);
+            this.ControlBitsGroupBox.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -465,19 +465,19 @@
         private Label label17;
         private Label label16;
         private TabPage tabPage1;
-        private Label label20;
-        private Label label8;
-        private GroupBox groupBox1;
-        private Label label24;
-        private Label label23;
-        private Label label22;
-        private Label label21;
+        private Label CodedWordLabel;
+        private Label CodedWordDescLabel;
+        private GroupBox ControlBitsGroupBox;
+        private Label C8Label;
+        private Label C4Label;
+        private Label C2Label;
+        private Label C1Label;
         private Label label7;
         private Label label6;
         private Label label5;
         private Label label2;
         private Button codeButton;
-        private TextBox textBox1;
+        private TextBox ToCodeTextBox;
         private Label label1;
         private Label label10;
         private Label label4;

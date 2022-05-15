@@ -11,31 +11,41 @@ namespace HammingCode
 
         private void CodeButton_Click(object sender, EventArgs e)
         {
-            string input = textBox1.Text;
+            string input = ToCodeTextBox.Text;
             Regex regex = new("[^01]");
+
             if (input.Length != 8 || regex.IsMatch(input))
             {
                 MessageBox.Show("Podaj 8-bitową liczbę binarną");
                 return;
             }
-            bool[] bits = textBox1.Text.AsEnumerable().Select(x => x == '1').ToArray();
+
+            bool[] bits = ToCodeTextBox.Text.AsEnumerable().Select(x => x == '1').ToArray();
             bool[] hammingCode = Hamming.ConvertToHamming(bits);
-            bool[] controlDigits = Hamming.GetControlDigits(hammingCode);
+
+            ShowControlBits(bits, input);
+
+            string output = new(hammingCode.Select(x => x == true ? '1' : '0').ToArray());
+
+            CodedWordLabel.Text = output;
+            CodedWordDescLabel.Visible = true;
+        }
+
+        private void ShowControlBits(bool[] bits, string input)
+        {
+            bool[] controlDigits = Hamming.CalculateControlBits(bits);
+
             string c1Text = $"{input[7]} xor {input[6]} xor {input[4]} xor {input[3]} xor {input[1]} = {controlDigits[0]}";
             string c2Text = $"{input[7]} xor {input[5]} xor {input[4]} xor {input[2]} xor {input[1]} = {controlDigits[1]}";
             string c4Text = $"{input[6]} xor {input[5]} xor {input[4]} xor {input[0]} = {controlDigits[2]}";
             string c8Text = $"{input[3]} xor {input[2]} xor {input[1]} xor {input[0]} = {controlDigits[3]}";
-            string output = new(hammingCode.Select(x => x == true ? '1' : '0').ToArray());
-            label20.Text = output;
-            label21.Text = c1Text;
-            label22.Text = c2Text;
-            label23.Text = c4Text;
-            label24.Text = c8Text;
-            groupBox1.Visible = true;
-            label8.Visible = true;
+
+            C1Label.Text = c1Text;
+            C2Label.Text = c2Text;
+            C4Label.Text = c4Text;
+            C8Label.Text = c8Text;
+            ControlBitsGroupBox.Visible = true;
         }
-
-
 
         private void DecodeButton_Click(object sender, EventArgs e)
         {

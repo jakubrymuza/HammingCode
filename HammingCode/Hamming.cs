@@ -8,18 +8,6 @@ namespace HammingCode
 {
     internal static class Hamming
     {
-        // wyciąga bity kontrolne z kodu Hamminga
-        public static bool[] GetControlDigits(bool[] hammingCode)
-        {
-            return new bool[]
-            {
-                hammingCode[11],
-                hammingCode[10],
-                hammingCode[8],
-                hammingCode[4],
-            };
-        }
-
         public static bool[] CalculateControlBits(bool[] word)
         {
             bool[] control = new bool[4]; // bity kontrolne C1 C2 C4 C8
