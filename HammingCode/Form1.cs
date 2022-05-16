@@ -24,7 +24,6 @@ namespace HammingCode
             string output = new(hammingCode.Select(x => x == true ? '1' : '0').ToArray());
 
             CodedWordLabel.Text = output;
-            CorrectWordLabel.Text = output;
             CodedWordDescLabel.Visible = true;
         }
 
@@ -35,6 +34,19 @@ namespace HammingCode
             if (input.Length != 8 || regex.IsMatch(input))
             {
                 MessageBox.Show("Podaj 8-bitową liczbę binarną");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidateDecode(string input)
+        {
+            Regex regex = new("[^01]");
+
+            if (input.Length != 12 || regex.IsMatch(input))
+            {
+                MessageBox.Show("Podaj 12-bitową liczbę binarną");
                 return false;
             }
 
@@ -60,28 +72,54 @@ namespace HammingCode
 
         private void DecodeButton_Click(object sender, EventArgs e)
         {
-            string word = CorrectWordLabel.Text;
-            int indexToChange = 12 - (int)CorruptedBitNumber.Value;
-            char valueToChange = word[indexToChange];
-            char replacemnetValue = valueToChange == '1' ? '0' : '1';
-            string input = word.Substring(0, 4) + word.Substring(5, 3) + word[9];
-            string corruptedWord = word.Remove(indexToChange, 1).Insert(indexToChange, replacemnetValue.ToString());
-            string corruptedInput = corruptedWord.Substring(0, 4) + corruptedWord.Substring(5, 3) + corruptedWord[9];
-            bool[] bits = BinaryConverter.StringToBin(input);
-            bool[] corruptedBits = BinaryConverter.StringToBin(corruptedInput);
-            bool[] correctHammingCode = Hamming.ConvertToHamming(bits);
-            bool[] corruptedHammingCode = Hamming.ConvertToHamming(corruptedBits);
+            string input = DecodeInputTextBox.Text;
+            if (!ValidateDecode(input)) return;
+            string wordToCheck = input.Substring(0, 4) + input.Substring(5, 3) + input[9];
+            bool[] inputBits = BinaryConverter.StringToBin(input);
+            bool[] bits = BinaryConverter.StringToBin(wordToCheck);
+            bool[] hammingCode = Hamming.ConvertToHamming(bits);
             int syndrome = 0;
-            syndrome += Convert.ToInt32(correctHammingCode[4] ^ corruptedHammingCode[4]) * 8;
-            syndrome += Convert.ToInt32(correctHammingCode[8] ^ corruptedHammingCode[8]) * 4;
-            syndrome += Convert.ToInt32(correctHammingCode[10] ^ corruptedHammingCode[10]) * 2;
-            syndrome += Convert.ToInt32(correctHammingCode[11] ^ corruptedHammingCode[11]) * 1;
-            char[] correctControlBits = correctHammingCode.Select(e => e == true ? '1' : '0').ToArray();
-            char[] corruptedControlBits = corruptedHammingCode.Select(e => e == true ? '1' : '0').ToArray();
-            label3.Text = correctControlBits[4].ToString() + correctControlBits[8] + correctControlBits[10] + correctControlBits[11];
-            label4.Text = corruptedControlBits[4].ToString() + corruptedControlBits[8] + corruptedControlBits[10] + corruptedControlBits[11];
-            label10.Text = syndrome.ToString();
-            groupBox3.Visible = true;
+            syndrome += Convert.ToInt32(inputBits[4] ^ hammingCode[4]) * 8;
+            syndrome += Convert.ToInt32(inputBits[8] ^ hammingCode[8]) * 4;
+            syndrome += Convert.ToInt32(inputBits[10] ^ hammingCode[10]) * 2;
+            syndrome += Convert.ToInt32(inputBits[11] ^ hammingCode[11]) * 1;
+            string originalControlBits = input[4].ToString() + input[8] + input[10] + input[11];
+            string hammingCodeString = new(hammingCode.Select(e => e == true ? '1' : '0').ToArray());
+            string newControlBits = hammingCodeString[4].ToString() + hammingCodeString[8] + hammingCodeString[10] + hammingCodeString[11];
+            string correctedWord = CorrectWrongBit(hammingCodeString, syndrome);
+            if (correctedWord == "BŁĄD") return;
+            string decodedWord = correctedWord.Substring(0, 4) + correctedWord.Substring(5, 3) + correctedWord[9];
+            OriginalControlBitsLabel.Text = originalControlBits;
+            NewControlBitsLabel.Text = newControlBits;
+            SyndromeLabel.Text = $"{Convert.ToString(syndrome, 2)} -> {syndrome}";
+            ResultGroupBox.Visible = true;
+            DecodedWordDescriptionLabel.Visible = true;
+            DecodedWordLabel.Visible = true;
+            DecodedWordLabel.Text = decodedWord;
+        }
+
+        private string CorrectWrongBit(string input, int syndrome)
+        {
+            if (syndrome <= 0) return input;
+            if (syndrome > 12)
+            {
+                MessageBox.Show("To słowo zawierało więcej niż jeden błąd. Nie można zdekodować za pomocą syndromu Hamminga.", "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return "BŁĄD";
+            }
+            int indexToChange = 12 - syndrome;
+            char toChange = input[indexToChange];
+            char replacement = toChange == '1' ? '0' : '1';
+            return input.Remove(indexToChange, 1).Insert(indexToChange, replacement.ToString());
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
