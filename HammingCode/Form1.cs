@@ -60,7 +60,7 @@ namespace HammingCode
         private void DecodeButton_Click(object sender, EventArgs e)
         {
             string input = DecodeInputTextBox.Text;
-            if (!ValidateDecode(input, 12)) return;
+            if (!Validate(input, 12)) return;
             string wordToCheck = RemoveControlBits(input);
             bool[] inputBits = BinaryConverter.StringToBin(input);
             bool[] bits = BinaryConverter.StringToBin(wordToCheck);
