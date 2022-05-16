@@ -85,10 +85,8 @@ namespace HammingCode
         private static void Decode(string input, out int syndrome, out string originalControlBits, out string hammingCodeString, out string newControlBits)
         {
             string wordToCheck = Hamming.RemoveControlBits(input);
-            bool[] inputBits = BinaryConverter.StringToBin(input);
-            bool[] bits = BinaryConverter.StringToBin(wordToCheck);
-            bool[] hammingCode = Hamming.ConvertToHamming(bits);
-            syndrome = Hamming.CalculateSyndrome(inputBits, hammingCode);
+            bool[] hammingCode = Hamming.ConvertToHamming(BinaryConverter.StringToBin(wordToCheck));
+            syndrome = Hamming.CalculateSyndrome(BinaryConverter.StringToBin(input), hammingCode);
             originalControlBits = Hamming.GetControlBits(input);
             hammingCodeString = BinaryConverter.BinToString(hammingCode);
             newControlBits = Hamming.GetControlBits(hammingCodeString);
