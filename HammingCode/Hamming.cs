@@ -42,5 +42,15 @@
             hammingCode[9] = word[7];
             return hammingCode;
         }
+
+        public static int CalculateSyndrome(bool[] inputBits, bool[] hammingCode)
+        {
+            int syndrome = 0;
+            syndrome += Convert.ToInt32(inputBits[4] ^ hammingCode[4]) * 8;
+            syndrome += Convert.ToInt32(inputBits[8] ^ hammingCode[8]) * 4;
+            syndrome += Convert.ToInt32(inputBits[10] ^ hammingCode[10]) * 2;
+            syndrome += Convert.ToInt32(inputBits[11] ^ hammingCode[11]) * 1;
+            return syndrome;
+        }
     }
 }

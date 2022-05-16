@@ -74,24 +74,21 @@ namespace HammingCode
         {
             string input = DecodeInputTextBox.Text;
             if (!ValidateDecode(input)) return;
-            string wordToCheck = input.Substring(0, 4) + input.Substring(5, 3) + input[9];
+            string wordToCheck = RemoveControlBits(input);
             bool[] inputBits = BinaryConverter.StringToBin(input);
             bool[] bits = BinaryConverter.StringToBin(wordToCheck);
             bool[] hammingCode = Hamming.ConvertToHamming(bits);
-            int syndrome = 0;
-            syndrome += Convert.ToInt32(inputBits[4] ^ hammingCode[4]) * 8;
-            syndrome += Convert.ToInt32(inputBits[8] ^ hammingCode[8]) * 4;
-            syndrome += Convert.ToInt32(inputBits[10] ^ hammingCode[10]) * 2;
-            syndrome += Convert.ToInt32(inputBits[11] ^ hammingCode[11]) * 1;
-            string originalControlBits = input[4].ToString() + input[8] + input[10] + input[11];
-            string hammingCodeString = new(hammingCode.Select(e => e == true ? '1' : '0').ToArray());
-            string newControlBits = hammingCodeString[4].ToString() + hammingCodeString[8] + hammingCodeString[10] + hammingCodeString[11];
+            int syndrome = Hamming.CalculateSyndrome(inputBits, hammingCode);
+            string originalControlBits = GetControlBits(input);
+            string hammingCodeString = BinaryConverter.BinToString(hammingCode);
+            string newControlBits = GetControlBits(hammingCodeString);
             string correctedWord = CorrectWrongBit(hammingCodeString, syndrome);
             if (correctedWord == "BŁĄD") return;
-            string decodedWord = correctedWord.Substring(0, 4) + correctedWord.Substring(5, 3) + correctedWord[9];
+            string decodedWord = RemoveControlBits(correctedWord);
+
             OriginalControlBitsLabel.Text = originalControlBits;
             NewControlBitsLabel.Text = newControlBits;
-            SyndromeLabel.Text = $"{Convert.ToString(syndrome, 2)} -> {syndrome}";
+            SyndromeLabel.Text = $"{Convert.ToString(syndrome, 2).PadLeft(4, '0')} -> {syndrome}";
             ResultGroupBox.Visible = true;
             DecodedWordDescriptionLabel.Visible = true;
             DecodedWordLabel.Visible = true;
@@ -111,6 +108,14 @@ namespace HammingCode
             char replacement = toChange == '1' ? '0' : '1';
             return input.Remove(indexToChange, 1).Insert(indexToChange, replacement.ToString());
         }
+
+        private string RemoveControlBits(string word)
+        {
+            string result = word.Substring(0, 4) + word.Substring(5, 3) + word[9];
+            return result;
+        }
+
+        private string GetControlBits(string input) => input[4].ToString() + input[8] + input[10] + input[11];
 
         private void label14_Click(object sender, EventArgs e)
         {
