@@ -61,17 +61,27 @@ namespace HammingCode
         {
             string input = DecodeInputTextBox.Text;
             if (!Validate(input, 12)) return;
-            string wordToCheck = RemoveControlBits(input);
+            string wordToCheck = Hamming.RemoveControlBits(input);
             bool[] inputBits = BinaryConverter.StringToBin(input);
             bool[] bits = BinaryConverter.StringToBin(wordToCheck);
             bool[] hammingCode = Hamming.ConvertToHamming(bits);
             int syndrome = Hamming.CalculateSyndrome(inputBits, hammingCode);
-            string originalControlBits = GetControlBits(input);
+            string originalControlBits = Hamming.GetControlBits(input);
             string hammingCodeString = BinaryConverter.BinToString(hammingCode);
-            string newControlBits = GetControlBits(hammingCodeString);
-            string correctedWord = CorrectWrongBit(hammingCodeString, syndrome);
-            if (correctedWord == "BŁĄD") return;
-            string decodedWord = RemoveControlBits(correctedWord);
+            string newControlBits = Hamming.GetControlBits(hammingCodeString);
+
+            string correctedWord;
+            try
+            {
+                correctedWord = Hamming.CorrectWrongBit(hammingCodeString, syndrome);
+            }
+            catch (Exceptions.TooManyMistakesException)
+            {
+                MessageBox.Show("To słowo zawierało więcej niż jeden błąd. Nie można zdekodować za pomocą syndromu Hamminga.", "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string decodedWord = Hamming.RemoveControlBits(correctedWord);
 
             OriginalControlBitsLabel.Text = originalControlBits;
             NewControlBitsLabel.Text = newControlBits;
@@ -82,27 +92,7 @@ namespace HammingCode
             DecodedWordLabel.Text = decodedWord;
         }
 
-        private string CorrectWrongBit(string input, int syndrome)
-        {
-            if (syndrome <= 0) return input;
-            if (syndrome > 12)
-            {
-                MessageBox.Show("To słowo zawierało więcej niż jeden błąd. Nie można zdekodować za pomocą syndromu Hamminga.", "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return "BŁĄD";
-            }
-            int indexToChange = 12 - syndrome;
-            char toChange = input[indexToChange];
-            char replacement = toChange == '1' ? '0' : '1';
-            return input.Remove(indexToChange, 1).Insert(indexToChange, replacement.ToString());
-        }
 
-        private string RemoveControlBits(string word)
-        {
-            string result = word.Substring(0, 4) + word.Substring(5, 3) + word[9];
-            return result;
-        }
-
-        private string GetControlBits(string input) => input[4].ToString() + input[8] + input[10] + input[11];
 
         private void label14_Click(object sender, EventArgs e)
         {

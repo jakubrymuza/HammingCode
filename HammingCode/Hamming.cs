@@ -52,5 +52,26 @@
             syndrome += Convert.ToInt32(inputBits[11] ^ hammingCode[11]) * 1;
             return syndrome;
         }
+
+        public static string CorrectWrongBit(string input, int syndrome)
+        {
+            if (syndrome <= 0)
+                return input;
+            if (syndrome > 12)
+                throw new Exceptions.TooManyMistakesException();
+
+            int indexToChange = 12 - syndrome;
+            char toChange = input[indexToChange];
+            char replacement = toChange == '1' ? '0' : '1';
+            return input.Remove(indexToChange, 1).Insert(indexToChange, replacement.ToString());
+        }
+
+        public static string RemoveControlBits(string word)
+        {
+            string result = word.Substring(0, 4) + word.Substring(5, 3) + word[9];
+            return result;
+        }
+
+        public static string GetControlBits(string input) => input[4].ToString() + input[8] + input[10] + input[11];
     }
 }

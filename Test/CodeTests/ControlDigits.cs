@@ -1,5 +1,5 @@
-﻿using Xunit;
-using HammingCode;
+﻿using HammingCode;
+using Xunit;
 
 namespace Test.CodeTests
 {
@@ -11,7 +11,7 @@ namespace Test.CodeTests
         {
             var inputBits = BinaryConverter.StringToBin("10101010");
             var expectedControlBits = BinaryConverter.StringToBin("1110");
-       
+
             var calculatedControlBits = Hamming.CalculateControlBits(inputBits);
 
             Assert.Equal(expectedControlBits, calculatedControlBits);
