@@ -61,17 +61,10 @@ namespace HammingCode
         {
             string input = DecodeInputTextBox.Text;
 
-            if (!Validate(input, 12)) 
+            if (!Validate(input, 12))
                 return;
 
-            string wordToCheck = Hamming.RemoveControlBits(input);
-            bool[] inputBits = BinaryConverter.StringToBin(input);
-            bool[] bits = BinaryConverter.StringToBin(wordToCheck);
-            bool[] hammingCode = Hamming.ConvertToHamming(bits);
-            int syndrome = Hamming.CalculateSyndrome(inputBits, hammingCode);
-            string originalControlBits = Hamming.GetControlBits(input);
-            string hammingCodeString = BinaryConverter.BinToString(hammingCode);
-            string newControlBits = Hamming.GetControlBits(hammingCodeString);
+            Decode(input, out int syndrome, out string originalControlBits, out string hammingCodeString, out string newControlBits);
 
             string correctedWord;
             try
@@ -86,6 +79,23 @@ namespace HammingCode
 
             string decodedWord = Hamming.RemoveControlBits(correctedWord);
 
+            OutputDecode(syndrome, originalControlBits, newControlBits, decodedWord);
+        }
+
+        private static void Decode(string input, out int syndrome, out string originalControlBits, out string hammingCodeString, out string newControlBits)
+        {
+            string wordToCheck = Hamming.RemoveControlBits(input);
+            bool[] inputBits = BinaryConverter.StringToBin(input);
+            bool[] bits = BinaryConverter.StringToBin(wordToCheck);
+            bool[] hammingCode = Hamming.ConvertToHamming(bits);
+            syndrome = Hamming.CalculateSyndrome(inputBits, hammingCode);
+            originalControlBits = Hamming.GetControlBits(input);
+            hammingCodeString = BinaryConverter.BinToString(hammingCode);
+            newControlBits = Hamming.GetControlBits(hammingCodeString);
+        }
+
+        private void OutputDecode(int syndrome, string originalControlBits, string newControlBits, string decodedWord)
+        {
             OriginalControlBitsLabel.Text = originalControlBits;
             NewControlBitsLabel.Text = newControlBits;
             SyndromeLabel.Text = $"{Convert.ToString(syndrome, 2).PadLeft(4, '0')} -> {syndrome}";
