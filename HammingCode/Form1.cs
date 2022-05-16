@@ -60,7 +60,10 @@ namespace HammingCode
         private void DecodeButton_Click(object sender, EventArgs e)
         {
             string input = DecodeInputTextBox.Text;
-            if (!Validate(input, 12)) return;
+
+            if (!Validate(input, 12)) 
+                return;
+
             string wordToCheck = Hamming.RemoveControlBits(input);
             bool[] inputBits = BinaryConverter.StringToBin(input);
             bool[] bits = BinaryConverter.StringToBin(wordToCheck);
@@ -90,18 +93,6 @@ namespace HammingCode
             DecodedWordDescriptionLabel.Visible = true;
             DecodedWordLabel.Visible = true;
             DecodedWordLabel.Text = decodedWord;
-        }
-
-
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
