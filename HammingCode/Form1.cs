@@ -13,7 +13,7 @@ namespace HammingCode
         {
             string input = ToCodeTextBox.Text;
 
-            if (!Validate(input))
+            if (!Validate(input, 8))
                 return;
 
             bool[] bits = BinaryConverter.StringToBin(input);
@@ -27,26 +27,13 @@ namespace HammingCode
             CodedWordDescLabel.Visible = true;
         }
 
-        private bool Validate(string input)
+        private bool Validate(string input, int length)
         {
             Regex regex = new("[^01]");
 
-            if (input.Length != 8 || regex.IsMatch(input))
+            if (input.Length != length || regex.IsMatch(input))
             {
-                MessageBox.Show("Podaj 8-bitową liczbę binarną");
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidateDecode(string input)
-        {
-            Regex regex = new("[^01]");
-
-            if (input.Length != 12 || regex.IsMatch(input))
-            {
-                MessageBox.Show("Podaj 12-bitową liczbę binarną");
+                MessageBox.Show($"Podaj {length}-bitową liczbę binarną");
                 return false;
             }
 
@@ -73,7 +60,7 @@ namespace HammingCode
         private void DecodeButton_Click(object sender, EventArgs e)
         {
             string input = DecodeInputTextBox.Text;
-            if (!ValidateDecode(input)) return;
+            if (!ValidateDecode(input, 12)) return;
             string wordToCheck = RemoveControlBits(input);
             bool[] inputBits = BinaryConverter.StringToBin(input);
             bool[] bits = BinaryConverter.StringToBin(wordToCheck);
