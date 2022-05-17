@@ -52,5 +52,48 @@
             syndrome += Convert.ToInt32(inputBits[11] ^ hammingCode[11]) * 1;
             return syndrome;
         }
+
+        public static string CorrectWrongBit(string input, int syndrome)
+        {
+            if (syndrome <= 0)
+                return input;
+            if (syndrome > 12)
+                throw new Exceptions.TooManyMistakesException();
+
+            int indexToChange = 12 - syndrome;
+            char toChange = input[indexToChange];
+            char replacement = toChange == '1' ? '0' : '1';
+            return input.Remove(indexToChange, 1).Insert(indexToChange, replacement.ToString());
+        }
+
+        public static string RemoveControlBits(string word)
+        {
+            string result = word.Substring(0, 4) + word.Substring(5, 3) + word[9];
+            return result;
+        }
+
+        public static string GetControlBits(string input) => input[4].ToString() + input[8] + input[10] + input[11];
+
+        public static string Decode(string input)
+        {
+            string wordToCheck = RemoveControlBits(input);
+            bool[] hammingCode = ConvertToHamming(BinaryConverter.StringToBin(wordToCheck));
+            int syndrome = CalculateSyndrome(BinaryConverter.StringToBin(input), hammingCode);
+            string hammingCodeString = BinaryConverter.BinToString(hammingCode);
+            string correctedWord = CorrectWrongBit(hammingCodeString, syndrome);
+            return Hamming.RemoveControlBits(correctedWord);
+        }
+
+        public static string Decode(string input, out int syndrome, out string originalControlBits, out string newControlBits)
+        {
+            string wordToCheck = Hamming.RemoveControlBits(input);
+            bool[] hammingCode = Hamming.ConvertToHamming(BinaryConverter.StringToBin(wordToCheck));
+            syndrome = Hamming.CalculateSyndrome(BinaryConverter.StringToBin(input), hammingCode);
+            originalControlBits = Hamming.GetControlBits(input);
+            string hammingCodeString = BinaryConverter.BinToString(hammingCode);
+            newControlBits = Hamming.GetControlBits(hammingCodeString);
+            string correctedWord = Hamming.CorrectWrongBit(hammingCodeString, syndrome);
+            return Hamming.RemoveControlBits(correctedWord);
+        }
     }
 }

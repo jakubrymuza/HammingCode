@@ -143,7 +143,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Kodowanie";
             this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // CodedWordLabel
             // 
@@ -410,7 +409,6 @@
             this.label14.Size = new System.Drawing.Size(236, 20);
             this.label14.TabIndex = 0;
             this.label14.Text = "Wprowadź słowo do sprawdzenia:";
-            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // Form1
             // 

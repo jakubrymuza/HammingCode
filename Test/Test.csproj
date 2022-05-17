@@ -24,8 +24,4 @@
     <ProjectReference Include="..\HammingCode\HammingCode.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DecodeTests\" />
-  </ItemGroup>
-
 </Project>

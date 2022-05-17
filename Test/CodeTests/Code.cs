@@ -1,5 +1,5 @@
-﻿using Xunit;
-using HammingCode;
+﻿using HammingCode;
+using Xunit;
 
 namespace Test.CodeTests
 {

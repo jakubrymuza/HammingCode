@@ -13,7 +13,7 @@ namespace HammingCode
         {
             string input = ToCodeTextBox.Text;
 
-            if (!Validate(input))
+            if (!Validate(input, 8))
                 return;
 
             bool[] bits = BinaryConverter.StringToBin(input);
@@ -27,26 +27,13 @@ namespace HammingCode
             CodedWordDescLabel.Visible = true;
         }
 
-        private bool Validate(string input)
+        private static bool Validate(string input, int length)
         {
             Regex regex = new("[^01]");
 
-            if (input.Length != 8 || regex.IsMatch(input))
+            if (input.Length != length || regex.IsMatch(input))
             {
-                MessageBox.Show("Podaj 8-bitową liczbę binarną");
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidateDecode(string input)
-        {
-            Regex regex = new("[^01]");
-
-            if (input.Length != 12 || regex.IsMatch(input))
-            {
-                MessageBox.Show("Podaj 12-bitową liczbę binarną");
+                MessageBox.Show($"Podaj {length}-bitową liczbę binarną");
                 return false;
             }
 
@@ -73,19 +60,28 @@ namespace HammingCode
         private void DecodeButton_Click(object sender, EventArgs e)
         {
             string input = DecodeInputTextBox.Text;
-            if (!ValidateDecode(input)) return;
-            string wordToCheck = RemoveControlBits(input);
-            bool[] inputBits = BinaryConverter.StringToBin(input);
-            bool[] bits = BinaryConverter.StringToBin(wordToCheck);
-            bool[] hammingCode = Hamming.ConvertToHamming(bits);
-            int syndrome = Hamming.CalculateSyndrome(inputBits, hammingCode);
-            string originalControlBits = GetControlBits(input);
-            string hammingCodeString = BinaryConverter.BinToString(hammingCode);
-            string newControlBits = GetControlBits(hammingCodeString);
-            string correctedWord = CorrectWrongBit(hammingCodeString, syndrome);
-            if (correctedWord == "BŁĄD") return;
-            string decodedWord = RemoveControlBits(correctedWord);
 
+            if (!Validate(input, 12))
+                return;
+
+            int syndrome;
+            string decodedWord, originalControlBits, newControlBits;
+
+            try
+            {
+                decodedWord = Hamming.Decode(input, out syndrome, out originalControlBits, out newControlBits);
+            }
+            catch (Exceptions.TooManyMistakesException)
+            {
+                MessageBox.Show("To słowo zawierało więcej niż jeden błąd. Nie można zdekodować za pomocą syndromu Hamminga.", "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            OutputDecode(syndrome, originalControlBits, newControlBits, decodedWord);
+        }
+
+        private void OutputDecode(int syndrome, string originalControlBits, string newControlBits, string decodedWord)
+        {
             OriginalControlBitsLabel.Text = originalControlBits;
             NewControlBitsLabel.Text = newControlBits;
             SyndromeLabel.Text = $"{Convert.ToString(syndrome, 2).PadLeft(4, '0')} -> {syndrome}";
@@ -93,38 +89,6 @@ namespace HammingCode
             DecodedWordDescriptionLabel.Visible = true;
             DecodedWordLabel.Visible = true;
             DecodedWordLabel.Text = decodedWord;
-        }
-
-        private string CorrectWrongBit(string input, int syndrome)
-        {
-            if (syndrome <= 0) return input;
-            if (syndrome > 12)
-            {
-                MessageBox.Show("To słowo zawierało więcej niż jeden błąd. Nie można zdekodować za pomocą syndromu Hamminga.", "Uwaga", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return "BŁĄD";
-            }
-            int indexToChange = 12 - syndrome;
-            char toChange = input[indexToChange];
-            char replacement = toChange == '1' ? '0' : '1';
-            return input.Remove(indexToChange, 1).Insert(indexToChange, replacement.ToString());
-        }
-
-        private string RemoveControlBits(string word)
-        {
-            string result = word.Substring(0, 4) + word.Substring(5, 3) + word[9];
-            return result;
-        }
-
-        private string GetControlBits(string input) => input[4].ToString() + input[8] + input[10] + input[11];
-
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
