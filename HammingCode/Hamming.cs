@@ -73,5 +73,27 @@
         }
 
         public static string GetControlBits(string input) => input[4].ToString() + input[8] + input[10] + input[11];
+
+        public static string Decode(string input)
+        {
+            string wordToCheck = RemoveControlBits(input);
+            bool[] hammingCode = ConvertToHamming(BinaryConverter.StringToBin(wordToCheck));
+            int syndrome = CalculateSyndrome(BinaryConverter.StringToBin(input), hammingCode);
+            string hammingCodeString = BinaryConverter.BinToString(hammingCode);
+            string correctedWord = CorrectWrongBit(hammingCodeString, syndrome);
+            return Hamming.RemoveControlBits(correctedWord);
+        }
+
+        public static string Decode(string input, out int syndrome, out string originalControlBits, out string newControlBits)
+        {
+            string wordToCheck = Hamming.RemoveControlBits(input);
+            bool[] hammingCode = Hamming.ConvertToHamming(BinaryConverter.StringToBin(wordToCheck));
+            syndrome = Hamming.CalculateSyndrome(BinaryConverter.StringToBin(input), hammingCode);
+            originalControlBits = Hamming.GetControlBits(input);
+            string hammingCodeString = BinaryConverter.BinToString(hammingCode);
+            newControlBits = Hamming.GetControlBits(hammingCodeString);
+            string correctedWord = Hamming.CorrectWrongBit(hammingCodeString, syndrome);
+            return Hamming.RemoveControlBits(correctedWord);
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace HammingCode
             CodedWordDescLabel.Visible = true;
         }
 
-        private bool Validate(string input, int length)
+        private static bool Validate(string input, int length)
         {
             Regex regex = new("[^01]");
 
@@ -64,12 +64,12 @@ namespace HammingCode
             if (!Validate(input, 12))
                 return;
 
-            Decode(input, out int syndrome, out string originalControlBits, out string hammingCodeString, out string newControlBits);
+            int syndrome;
+            string decodedWord, originalControlBits, newControlBits;
 
-            string correctedWord;
             try
             {
-                correctedWord = Hamming.CorrectWrongBit(hammingCodeString, syndrome);
+                decodedWord = Hamming.Decode(input, out syndrome, out originalControlBits, out newControlBits);
             }
             catch (Exceptions.TooManyMistakesException)
             {
@@ -77,19 +77,7 @@ namespace HammingCode
                 return;
             }
 
-            string decodedWord = Hamming.RemoveControlBits(correctedWord);
-
             OutputDecode(syndrome, originalControlBits, newControlBits, decodedWord);
-        }
-
-        private static void Decode(string input, out int syndrome, out string originalControlBits, out string hammingCodeString, out string newControlBits)
-        {
-            string wordToCheck = Hamming.RemoveControlBits(input);
-            bool[] hammingCode = Hamming.ConvertToHamming(BinaryConverter.StringToBin(wordToCheck));
-            syndrome = Hamming.CalculateSyndrome(BinaryConverter.StringToBin(input), hammingCode);
-            originalControlBits = Hamming.GetControlBits(input);
-            hammingCodeString = BinaryConverter.BinToString(hammingCode);
-            newControlBits = Hamming.GetControlBits(hammingCodeString);
         }
 
         private void OutputDecode(int syndrome, string originalControlBits, string newControlBits, string decodedWord)
