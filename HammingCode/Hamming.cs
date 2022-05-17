@@ -74,6 +74,7 @@
 
         public static string GetControlBits(string input) => input[4].ToString() + input[8] + input[10] + input[11];
 
+        // funckja dekoduje input
         public static string Decode(string input)
         {
             string wordToCheck = RemoveControlBits(input);
