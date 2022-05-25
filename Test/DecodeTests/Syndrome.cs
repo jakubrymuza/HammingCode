@@ -12,7 +12,7 @@ namespace Test.DecodeTests
             int expectedSyndrome = 0;
             string inputBits = "101001011000";
 
-            var _ = Hamming.Decode(inputBits, out int calculatedSyndrome, out string _, out string _);
+            var _ = Hamming.Decode(inputBits, out int calculatedSyndrome, out string _, out string _, out string _);
 
             Assert.Equal(expectedSyndrome, calculatedSyndrome);
         }
@@ -23,7 +23,7 @@ namespace Test.DecodeTests
             int expectedSyndrome = 10;
             string inputBits = "000011010111";
 
-            var _ = Hamming.Decode(inputBits, out int calculatedSyndrome, out string _, out string _);
+            var _ = Hamming.Decode(inputBits, out int calculatedSyndrome, out string _, out string _, out string _);
 
             Assert.Equal(expectedSyndrome, calculatedSyndrome);
         }
@@ -34,7 +34,7 @@ namespace Test.DecodeTests
             int expectedSyndrome = 8;
             string inputBits = "101011011000";
 
-            var _ = Hamming.Decode(inputBits, out int calculatedSyndrome, out string _, out string _);
+            var _ = Hamming.Decode(inputBits, out int calculatedSyndrome, out string _, out string _, out string _);
 
             Assert.Equal(expectedSyndrome, calculatedSyndrome);
         }

@@ -12,7 +12,7 @@ namespace Test.DecodeTests
             string expectedOriginalControlBits = "0100";
             string inputBits = "101001011000";
 
-            var _ = Hamming.Decode(inputBits, out int _, out string calculatedOriginalControlBits, out string _);
+            var _ = Hamming.Decode(inputBits, out int _, out string calculatedOriginalControlBits, out string _, out string _);
 
             Assert.Equal(expectedOriginalControlBits, calculatedOriginalControlBits);
         }
@@ -23,7 +23,7 @@ namespace Test.DecodeTests
             string expectedOriginalControlBits = "1011";
             string inputBits = "000011010111";
 
-            var _ = Hamming.Decode(inputBits, out int _, out string calculatedOriginalControlBits, out string _);
+            var _ = Hamming.Decode(inputBits, out int _, out string calculatedOriginalControlBits, out string _, out string _);
 
             Assert.Equal(expectedOriginalControlBits, calculatedOriginalControlBits);
         }
@@ -34,7 +34,7 @@ namespace Test.DecodeTests
             string expectedOriginalControlBits = "1100";
             string inputBits = "101011011000";
 
-            var _ = Hamming.Decode(inputBits, out int _, out string calculatedOriginalControlBits, out string _);
+            var _ = Hamming.Decode(inputBits, out int _, out string calculatedOriginalControlBits, out string _, out string _);
 
             Assert.Equal(expectedOriginalControlBits, calculatedOriginalControlBits);
         }
