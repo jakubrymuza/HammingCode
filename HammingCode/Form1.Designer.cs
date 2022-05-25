@@ -50,6 +50,8 @@
             this.ToCodeTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.TransmittedWordLabel = new System.Windows.Forms.Label();
+            this.TransmittedWordDescriptionLabel = new System.Windows.Forms.Label();
             this.DecodedWordLabel = new System.Windows.Forms.Label();
             this.DecodedWordDescriptionLabel = new System.Windows.Forms.Label();
             this.DecodeInputTextBox = new System.Windows.Forms.TextBox();
@@ -280,6 +282,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.TransmittedWordLabel);
+            this.tabPage2.Controls.Add(this.TransmittedWordDescriptionLabel);
             this.tabPage2.Controls.Add(this.DecodedWordLabel);
             this.tabPage2.Controls.Add(this.DecodedWordDescriptionLabel);
             this.tabPage2.Controls.Add(this.DecodeInputTextBox);
@@ -293,6 +297,26 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Dekodowanie";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // TransmittedWordLabel
+            // 
+            this.TransmittedWordLabel.AutoSize = true;
+            this.TransmittedWordLabel.Location = new System.Drawing.Point(365, 283);
+            this.TransmittedWordLabel.Name = "TransmittedWordLabel";
+            this.TransmittedWordLabel.Size = new System.Drawing.Size(50, 20);
+            this.TransmittedWordLabel.TabIndex = 13;
+            this.TransmittedWordLabel.Text = "label4";
+            this.TransmittedWordLabel.Visible = false;
+            // 
+            // TransmittedWordDescriptionLabel
+            // 
+            this.TransmittedWordDescriptionLabel.AutoSize = true;
+            this.TransmittedWordDescriptionLabel.Location = new System.Drawing.Point(216, 283);
+            this.TransmittedWordDescriptionLabel.Name = "TransmittedWordDescriptionLabel";
+            this.TransmittedWordDescriptionLabel.Size = new System.Drawing.Size(142, 20);
+            this.TransmittedWordDescriptionLabel.TabIndex = 12;
+            this.TransmittedWordDescriptionLabel.Text = "Słowo po transmisji:";
+            this.TransmittedWordDescriptionLabel.Visible = false;
             // 
             // DecodedWordLabel
             // 
@@ -471,5 +495,7 @@
         private TextBox DecodeInputTextBox;
         private Label DecodedWordLabel;
         private Label DecodedWordDescriptionLabel;
+        private Label TransmittedWordLabel;
+        private Label TransmittedWordDescriptionLabel;
     }
 }

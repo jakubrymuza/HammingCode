@@ -24,6 +24,7 @@ namespace HammingCode
             string output = new(hammingCode.Select(x => x == true ? '1' : '0').ToArray());
 
             CodedWordLabel.Text = output;
+            DecodeInputTextBox.Text = output;
             CodedWordDescLabel.Visible = true;
         }
 
@@ -65,11 +66,11 @@ namespace HammingCode
                 return;
 
             int syndrome;
-            string decodedWord, originalControlBits, newControlBits;
+            string decodedWord, originalControlBits, newControlBits, transmittedWord;
 
             try
             {
-                decodedWord = Hamming.Decode(input, out syndrome, out originalControlBits, out newControlBits);
+                decodedWord = Hamming.Decode(input, out syndrome, out originalControlBits, out newControlBits, out transmittedWord);
             }
             catch (Exceptions.TooManyMistakesException)
             {
@@ -77,15 +78,18 @@ namespace HammingCode
                 return;
             }
 
-            OutputDecode(syndrome, originalControlBits, newControlBits, decodedWord);
+            OutputDecode(syndrome, originalControlBits, newControlBits, decodedWord, transmittedWord);
         }
 
-        private void OutputDecode(int syndrome, string originalControlBits, string newControlBits, string decodedWord)
+        private void OutputDecode(int syndrome, string originalControlBits, string newControlBits, string decodedWord, string transmittedWord)
         {
             OriginalControlBitsLabel.Text = originalControlBits;
             NewControlBitsLabel.Text = newControlBits;
             SyndromeLabel.Text = $"{Convert.ToString(syndrome, 2).PadLeft(4, '0')} -> {syndrome}";
             ResultGroupBox.Visible = true;
+            TransmittedWordDescriptionLabel.Visible = true;
+            TransmittedWordLabel.Visible = true;
+            TransmittedWordLabel.Text = transmittedWord;
             DecodedWordDescriptionLabel.Visible = true;
             DecodedWordLabel.Visible = true;
             DecodedWordLabel.Text = decodedWord;
